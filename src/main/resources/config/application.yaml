@@ -1,0 +1,15 @@
+management:
+  endpoint:
+    health:
+      group:
+        liveness:
+          include: livenessState
+        readiness:
+          include: readinessState
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://keycloak.homesys.tk/auth/realms/homesys
+          jwk-set-uri: https://keycloak.homesys.tk/auth/realms/homesys/protocol/openid-connect/certs

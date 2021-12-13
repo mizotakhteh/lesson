@@ -1,0 +1,12 @@
+namespace: mizotakhteh
+
+resources:
+  - namespace.yaml
+  - lesson-postgresql-cm.yaml
+  - lesson-postgresql-dep.yaml
+  - lesson-postgresql-svc.yaml
+  - lesson-cm.yaml
+  - lesson-dep.yaml
+  - lesson-svc.yaml
+  - lesson-ing.yaml
+  

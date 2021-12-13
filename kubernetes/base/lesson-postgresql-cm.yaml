@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgresql-lesson
+data:
+  POSTGRES_DB: lesson
+  POSTGRES_PASSWORD: postgres

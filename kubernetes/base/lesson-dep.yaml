@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lesson
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lesson
+  template:
+    metadata:
+      labels:
+        app: lesson
+    spec:
+      containers:
+        - name: lesson
+          image: ghcr.io/mizotakhteh/lesson:latest
+          imagePullPolicy: Always
+          envFrom:
+            - configMapRef:
+                name: lesson
+          ports:
+            - name: http
+              containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+            initialDelaySeconds: 180
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+          resources:
+            limits:
+              cpu: 150m
+              memory: 300Mi
+            requests:
+              cpu: 0m
+              memory: 0Mi

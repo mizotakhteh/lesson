@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgresql-lesson
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgresql-lesson
+  template:
+    metadata:
+      labels:
+        app: postgresql-lesson
+    spec:
+      containers:
+        - name: postgresql-lesson
+          image: postgres
+          envFrom:
+            - configMapRef:
+                name: postgresql-lesson
+          ports:
+            - name: tcp
+              containerPort: 5432
+          resources:
+            limits:
+              cpu: 100m
+              memory: 100Mi
+            requests:
+              cpu: 0m
+              memory: 0Mi

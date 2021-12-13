@@ -1,0 +1,39 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.1'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id 'com.google.cloud.tools.jib' version '3.1.4'
+}
+
+jib.from.image = 'openjdk'
+
+group = 'ml.mizotakhteh'
+version = '0.0.1'
+sourceCompatibility = '17'
+
+repositories {
+	mavenCentral()
+	maven {
+		url 'https://maven.pkg.github.com/mizotakhteh/util'
+		credentials {
+			username = System.getenv("GITHUB_ACTOR") ?: github_actor // from global properties
+			password = System.getenv("GITHUB_TOKEN") ?: github_token // from global properties
+		}
+	}
+}
+
+dependencies {
+	implementation 'ml.mizotakhteh:util:0.+'
+
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation 'com.h2database:h2'
+	runtimeOnly 'org.postgresql:postgresql'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+	useJUnitPlatform()
+}
